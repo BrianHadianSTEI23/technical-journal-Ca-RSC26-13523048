@@ -1,0 +1,209 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref} % Required for inserting images
+\usepackage{listings} % Required for inserting images
+\usepackage{color}
+\usepackage{minted}
+
+\title{Technical Journal Ca-RSC 2026}
+\author{Brian Hadian}
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{29 Januari 2026}
+
+\subsection{What is learned}
+    \begin{enumerate}
+        \item Pengenalan RSC
+        \begin{enumerate}
+            \item Departement yang bertanggung jawab terhadap seluruh aspek perangkat lunak dari sistem wahana UAV, mulai dari pengembangan algoritma kendali otonom dan pengolahan citra hingga arsitektur antarmuka ground control station (GCS).
+            \item RSC memiliki dua keilmuan : 
+            \begin{itemize}
+                \item Control and Perspection (ConCept) : Berperan untuk pengembangan sistem navigasi otonom (ROS) dan pengembangan sistem persepsi menggunakan \textit{computer vision}
+                \item Ground Control Station (GCS) :  Berperan untuk pengembangan sistem kendali dari darat terhadap sistem UAV
+            \end{itemize}
+        \end{enumerate}
+        
+        \item Arsitektur Sistem UAV
+        \begin{enumerate}
+            \item Arsitektur Sistem UAV memiliki dua bagian utama : UAV dan GCS
+            \begin{enumerate}
+                \item UAV terdiri atas komponen :
+                \begin{itemize}
+                    \item Flight Controller : komponen yang bertanggung jawab untuk mengatur respons dan gerak dari wahana dan merupakan sumber kendali utama untuk \textit{avionics}
+                    \item Companion Computer : Komponen yang berfungsi untuk melakukan kalkulasi untuk aksi terhadap \textit{payload} seperti \textit{image processing, computer vision, dan machine learning}
+                    \item Avionics : komponen yang berfungsi untuk mengatur gerak dan memproses serta menyatukan data dari wahana, seperti modul GNSS, barometer, Inertial Measurement Unit (IMU), airspeed sensor, dsb.
+                    \item Payload System : komponen yang berguna untuk keperluan \textit{payload} seperti kamera depth, LiDAR, sensor partikel, dsb.
+                \end{itemize}
+                \item GCS bertanggung jawab untuk menerima status dari UAV dan memberikan \textit{command} langsung ke UAV menggunakan gelombang radio
+            \end{enumerate}
+            \item Komunikasi
+            \begin{enumerate}
+                \item Komunikasi dalam UAV biasanya menggunakan beberapa protokol (cara penyusunan pesan) dan media (saran penyampaian pesan)
+                \begin{itemize}
+                    \item Protokol
+                    \begin{enumerate}
+                        \item Syarat suatu protokol (3S):
+                        \begin{itemize}
+                            \item Semantik (Makna dari setiap bit)
+                            \item Sintaks (Cara penyusunan bit)
+                            \item Sinkronisasi (Cara pemahaman bit berdasarkan panjang dan format yang disepakati dua pihak)
+                        \end{itemize}
+                        \item Contoh beberapa protokol yang biasa digunakan adalah UART, I2C, dan SPI
+                    \end{enumerate}
+                    \item Media 
+                    \begin{itemize}
+                        \item Media yang biasanya digunakan untuk sistem internal (antar komponen dalam UAV) adalah \emph{wired}, sementara media yang biasa digunakan untuk sistem eksternal adalah \emph{wireless}
+                        \item Contoh media \emph{wired} adalah kabel UART dan SPI
+                        \item Contoh media \emph{wireless} adalah dongle wifi dan modul wifi yang terpasang pada \emph{flight controller}
+                    \end{itemize}
+                \end{itemize}
+                \item Beberapa protokol yang digunakakn
+            \end{enumerate}
+        \end{enumerate}
+        \item Dasar Pemrograman
+        \begin{enumerate}
+            \item Object-oriented Programming
+            \begin{enumerate}
+                \item Dilatarbelakangi oleh permasalahan akses suatu variabel yang cenderung dapat diakses dengan mudah oleh variabel lain. Hal ini dapat terjadi pada bahasa pemrograman prosedural seperti C dan dimanipulasi menggunakan \emph{buffer overflow}
+                \item Konsep paradigma pemrograman untuk mereprentasikan suatu objek di dunia nyata pada pemrograman untuk melakukan enkapsulasi (\emph{encapsulation}) terhadap data dan aksi yang dapat dilakukan oleh objek tersebut.
+                \item 4 Core of OOP : 
+                \begin{itemize}
+                    \item Encapsulation : melakukan pembatasan akses terhadap data yang dimiliki oleh suatu objek menggunakan \emph{access identifier}
+                    \item Contoh dari encapsulation adalah sebagai berikut :
+\begin{verbatim}
+class GPSDisplay {
+private:
+   float latitude;
+   float longitude;
+public:
+   void updatePosition(float lat, float lon) {
+       if ((lat < -90 || lat > 90) || (lon < -180 || lon > 180)) {
+           std::cerr << "gk valid\n";
+           return;
+       }
+       latitude = lat;
+       longitude = lon;
+   }
+   float getLat() { return latitude; }
+   float getLon() { return longitude; }
+};
+
+GPSDisplay gps;
+gps.updatePosition(drone.getLat(), drone.getLon());
+gps.updatePosition(999.0, -200.0); // lgsg ditolak
+
+float lat = gps.getLat();
+showOnMap(lat, gps.getLon());
+\end{verbatim}
+                \end{itemize}
+                \item Abstraction
+                \begin{itemize}
+                    \item Konsep untuk menyembunyikan hal yang rumit dalam mengoperasikan suatu data ke bagian dalam dari suatu objek sehingga pemanggilan fungsi yang menggambarkan apa yang diperlukan dari hal tersebut.
+                \end{itemize}
+                \item Inheritance
+                \begin{itemize}
+                    \item Konsep untuk menurunkan atribut (data dan method) ke kelas lain
+                    \item Biasanya digunakan untuk suatu objek yang merupakan penerapan yang lebih detail dibanding objek parentnya.
+                \end{itemize}
+                \item Polymorphism
+                \begin{itemize}
+                    \item Konsep untuk suatu objek turunan \emph{derived class} yang dapat diperlakukan sebagai objek dari basisnya \emph{base class}.
+                \end{itemize}
+            \end{enumerate}
+            
+        \item Design pattern
+        \begin{itemize}
+            \item Konsep pemetaan dan strategi penerapan OOP dalam pemrograman untuk menyelesaikan suatu permasalahan tertentu berdasarkan karakteristik dari hubungan antar objek tersebut.
+        \end{itemize}
+
+        \item Concurrency 
+        \begin{itemize}
+            \item Pola pemrograman untuk melakukan berbagai hal dalam satu waktu yang sama menggunakan \emph{threading}
+            \item Contoh dari penggunaan concurrency adalah sebagai berikut
+\begin{verbatim}
+    #include <thread>
+#include <iostream>
+#include <chrono>
+
+void telemetryLoop() {
+   for(int i = 0; i < 5; i++) {
+       std::cout << "tes (" << i << ")\n";
+       std::this_thread::sleep_for(std::chrono::seconds(1));
+   }
+}
+
+int main() {
+   std::thread telemetry_thread(telemetryLoop);   
+   for(int i = 0; i < 5; i++) {
+       std::cout << "p )\n";
+       std::this_thread::sleep_for(std::chrono::milliseconds(800));
+   }
+  
+   telemetry_thread.join();
+   return 0;
+}
+\end{verbatim}
+        \item Penggunaan multithreading memanfaatkan \emph{thread} yang merupakan suatu bagian kecil dari \emph{process} sehingga dapat mengakses data yang sama dari suatu \emph{process} yang sama tetapi memiliki stack terpisah dari thread lain.
+        
+        \item Penggunaan multithreading dapat mengakibatkan terjadinya \emph{race condition}, yakni kondisi dua thread mengubah nilai suatu variabel yang sama dalam satu waktu yang berdekatan, tetapi perubahan oleh satu thread ter-\emph{overwrite} oleh thread lain. 
+
+        \item Race condition dapat dicegah dengan penggunaan \emph{mutex} seperti pada contoh berikut.
+\begin{verbatim}
+    #include <mutex>
+
+int altitude = 0;
+std::mutex altitude_mutex;
+
+void telemetryThread() {
+   while(true) {
+       int new_alt = readFromDrone();
+      
+       altitude_mutex.lock();   
+       altitude = new_alt;      
+       altitude_mutex.unlock(); 
+      
+       std::this_thread::sleep_for(100ms);
+   }
+}
+
+void uiThread() {
+   while(true) {
+       altitude_mutex.lock();   
+       int current_alt = altitude;
+       altitude_mutex.unlock(); 
+      
+       displayAltitude(current_alt);
+       std::this_thread::sleep_for(50ms);
+   }
+}
+\end{verbatim}
+        \end{itemize}
+        
+        \end{enumerate}
+    \end{enumerate}
+
+\subsection{New tools}
+\begin{enumerate}
+    \item Latex
+    \item Avionics
+    \item Computer Companion
+    \item Serial Communication
+\end{enumerate}
+
+\subsection{Problem & Solutions}
+\begin{itemize}
+    \item None
+\end{itemize}
+
+\subsection{Sources}
+\begin{itemize}
+    \item \href{https://docs.google.com/presentation/d/1cosc8wM7Hahm7TQrdQiUQ329pnru50duFQHaYQCFLI8/edit?slide=id.g387762dc642_0_119#slide=id.g387762dc642_0_119}{Pengenalan RSC}
+    \item \href{https://docs.google.com/presentation/d/1gMVQKaxRVKXiOE_kjEPgq1_8WiMdWHG5bLTf2ZVcDBU/edit?slide=id.g3b4dcdc285d_0_6#slide=id.g3b4dcdc285d_0_6}{Arsitektur Sistem UAV}
+    \item \href{https://docs.google.com/presentation/d/1AzFyuYeqfNjdJ8JyxzHAkLFq5EKoJz9bRdj7aVJIyeY/edit?slide=id.g387762dc642_0_0#slide=id.g387762dc642_0_0}{Dasar Pemrograman}
+\end{itemize}
+
+\end{document}
