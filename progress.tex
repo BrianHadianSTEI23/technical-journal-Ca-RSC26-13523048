@@ -194,7 +194,7 @@ void uiThread() {
     \item Serial Communication
 \end{enumerate}
 
-\subsection{Problem & Solutions}
+\subsection{Problem \& Solutions}
 \begin{itemize}
     \item None
 \end{itemize}
@@ -205,5 +205,102 @@ void uiThread() {
     \item \href{https://docs.google.com/presentation/d/1gMVQKaxRVKXiOE_kjEPgq1_8WiMdWHG5bLTf2ZVcDBU/edit?slide=id.g3b4dcdc285d_0_6#slide=id.g3b4dcdc285d_0_6}{Arsitektur Sistem UAV}
     \item \href{https://docs.google.com/presentation/d/1AzFyuYeqfNjdJ8JyxzHAkLFq5EKoJz9bRdj7aVJIyeY/edit?slide=id.g387762dc642_0_0#slide=id.g387762dc642_0_0}{Dasar Pemrograman}
 \end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%% 30 Januari 2026
+
+\section{30 Januari 2026}
+
+\subsection{What is learned}
+\begin{enumerate}
+    \item Protokol MAVLINK
+    \begin{enumerate}
+        \item Intinya ini protokol mavlink itu format message yang dikirim antar GCS ke Drone yang udah dioptimize sesuai sama kebutuhan Drone dan setiap bit di message itu ada artinya sendiri. Contoh dari protokol MAVLINK itu biasanya dipake buat ngirim command dari GCS ke Drone, ngirim status dari Drone ke GCS, dsb.
+        \item Format message untuk protokol MAVLINK seperti berikut.
+        \begin{figure}[ht!]
+            \centering
+            \includegraphics[width=0.75\linewidth]{./media/mavlink.png}
+            \caption{Mavlink Protocol}
+            \label{fig:myimage}
+        \end{figure}
+        \item Contoh dari penggunaan protokol mavlink itu di telemetri dan microservices antar drone (contohnya kayak swarming). Penggunaan ini biasanya diterapkan menggunakan MAVProxy untuk mengontrol drone dari jarak jauh, dsb.
+    \end{enumerate}
+
+    \item Software-In-The-Loop (SITL)
+    \begin{enumerate}
+        \item Software in the loop (SITL) merupakan eksekusi program yang dibuat untuk drone menggunakan simulasi yang sudah disesuaikan dengan kondisi dunia nyata, seperti sifat fisikanya, jalur, dsb.
+        \item Cara kerja SITL dalam Aksantara ITB biasanya dimulai dari melakukan programming terlebih dahulu terhadap rute yang ingin dilalui oleh drone menggunakan MAVProxy (bisa automatic, bisa juga manual), kemudian rute dan command-command tersebut akan dikirim ke ArduPilot yang memiliki objek drone tersebut dan melakukan eksekusi command yang diterimanya. Selanjutnya, seluruh informasi pada drone tersebut dikirim ke simulator tertentu agar dapat dilihat melalui perspektif 3D, biasanya menggunakan Gazebo Simulator. Contoh dari alur tersebut adalah sebagai berikut.
+        \begin{figure}[ht!]
+            \centering
+            \includegraphics[width=0.75\linewidth]{./media/sitl.png}
+            \caption{SITL Workflow.}
+            \label{fig:myimage}
+        \end{figure}
+        \item Workflow ini biasanya penting digunakan untuk rute yang memiliki halangan atau objek yang tidak dapat digambarkan oleh Mission Planner biasa, sehingga memerlukan kontrol lebih untuk mengatur drone tersebut, atau dalam kasus lain, diperlukan simulasi apabila terjadi gangguan fisis terhadap drone tersebut.
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{New Tools}
+\begin{enumerate}
+    \item Ardupilot
+    \item Gazebo Simulator
+    \item MAVProxy
+    \item MAVSDK
+\end{enumerate}
+
+\subsection{Problem and Solutions}
+\begin{itemize}
+    \item Heavy Lagging : Upgrade RAM... 
+    \item Tugas Hands-On 2 relatif bisa berhasil atau tidak berhasil waktu connect pake MAVLink SDK buat Python. Sempet takeoff, tapi belum bisa bentuk angka 8 muter. : Coba direstart dari awal, trs jalanin dari awal aja. Jangan disatuin setelah manual angka 8
+\end{itemize}
+
+\subsection{Sources}
+\begin{itemize}
+    \item \href{https://docs.google.com/presentation/d/1K7dUfzG7IsyPHQzxUrBRzfQ_Fl5hWV3azQlY_Pkpa_c/edit?slide=id.g3bc4d0c4fba_0_337#slide=id.g3bc4d0c4fba_0_337}{MAVLink}
+    \item \href{https://docs.google.com/presentation/d/161pANZ7QofLcvcZGOjnbqpXr1FMTQsIl8tuvKL6hG2E/edit?slide=id.g3b4dcdc285d_0_6#slide=id.g3b4dcdc285d_0_6}{Software-In-The-Loop}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%% 2 February 2026
+
+\section{2 February 2026}
+
+\subsection{What is learned}
+\begin{enumerate}
+    \item Computer Vision
+    \begin{enumerate}
+        \item Intinya teknik yang digunakan untuk image processing yang biasanya berguna untuk object detection, edge detection, dan payload dropping. Computer Vision biasanya diimplementasikan di Drone untuk melakukan komputasi terhadap gambar yang cenderung sifatnya \textit{computation-heavy} sehingga diperlukan komputasi diluar komputasi oleh FC. 
+        \item Teknik computer vision ini biasanya digunakan karena cara ini merupakan cara yang paling cepat untuk melakukan deteksi terhadap objek atau payload dropping dengan sensitifitas tinggi. Contoh penggunaan kritis computer vision ada pada tim VTOL yang berfokus untuk payload dropping dengan syarat jatuhnya payload harus dalam radius tertentu.
+        \item Computer vision memiliki beberapa kategori, diantaranya
+        \begin{enumerate}
+            \item Pemrosesan Citra Digital, yang mencakup ruang warna,
+            \item Operasi neighborhood menggunakan matriks konvolusi untuk mendapatkan sifat tertentu atau morfologi untuk mengubah sifat tertentu, 
+            \item Thresholding untuk memperoleh layer tertentu dalam citra, 
+            \item Pemanfaatan geometri kamera untuk memperoleh koordinat \textit{latitude & longitude} dari suatu titik di kamera.
+        \end{enumerate}
+    \end{enumerate}
+
+    \item Machine Learning
+    \begin{enumerate}
+        \item Ilmu yang mengatasi Computer Vision dengan melakukan operasi tertentu pada suatu objek untuk mendapatkan suatu hasil prediksi tertentu. Ilmu ini biasanya digunakan untuk melakukan deteksi objek, mengetahui prediksi suatu nilai tertentu berdasarkan pola, dsb. 
+        \item Dalam memprediksi sesuatu, biasanya dapat terjadi underfit (kurangnya akurasi dalam memprediksi) dan overfit (terlalu baiknya akurasi dalam memprediksi). Hal ini dapat dihindari dengan melakukan pembagian dataset menjadi tiga kategori : data train untuk melakukan pelatihan terhadap model tersebut, data validation untuk melakukan pengukuran akurasi dan penyesuaian terhadap model tersebut, dan data test untuk melakukan testing akurasi model tersebut.
+        \item Bagian lain dari machine learning yang biasanya digunakan adalah deep learning dan pemanfaatan transfer-learning dan fine-tuning. Deep learning merupakan pemanfaatan model yang terinspirasi menggunakan neural network, sementara transfer-learning merupakan model deep learning yang sudah dilatih terlebih dahulu tetapi pelatihan selanjutnya masih memperbolehkan penambahan node baru, tapi fine-tuning hanya memperbolehkan perubahan weight pada setiap node tersebut tanpa adanya penambahan weight.
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{New Tools}
+\begin{enumerate}
+    \item OpenCV
+    \item Penerapan OpenCV di OnBoard Computer seperti Jetson Nano, etc
+\end{enumerate}
+
+\subsection{Problem and Solutions}
+\begin{itemize}
+    \item Tugas Hands-On 2 belum sempet implementasi YOLO buat frame-frame yang sudah dikerjakan : Bisa setup dulu sebelum hands-on dan coba-coba dulu kalau gitu... 
+\end{itemize}
+
+\subsection{Sources}
+\begin{itemize}
+    \item \href{https://docs.google.com/presentation/d/1eWFVnwYogy59CXYhC1RoQxCGd3fFAj4huDb7gDz-0bs/edit?slide=id.g3c2a5a9cf04_3_12#slide=id.g3c2a5a9cf04_3_12}{Control N Perception}
+\end{itemize}
+
 
 \end{document}
