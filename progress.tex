@@ -218,7 +218,7 @@ void uiThread() {
         \item Format message untuk protokol MAVLINK seperti berikut.
         \begin{figure}[ht!]
             \centering
-            \includegraphics[width=0.75\linewidth]{./media/mavlink.png}
+            \includegraphics[width=0.75\linewidth]{mavlink.png}
             \caption{Mavlink Protocol}
             \label{fig:myimage}
         \end{figure}
@@ -231,7 +231,7 @@ void uiThread() {
         \item Cara kerja SITL dalam Aksantara ITB biasanya dimulai dari melakukan programming terlebih dahulu terhadap rute yang ingin dilalui oleh drone menggunakan MAVProxy (bisa automatic, bisa juga manual), kemudian rute dan command-command tersebut akan dikirim ke ArduPilot yang memiliki objek drone tersebut dan melakukan eksekusi command yang diterimanya. Selanjutnya, seluruh informasi pada drone tersebut dikirim ke simulator tertentu agar dapat dilihat melalui perspektif 3D, biasanya menggunakan Gazebo Simulator. Contoh dari alur tersebut adalah sebagai berikut.
         \begin{figure}[ht!]
             \centering
-            \includegraphics[width=0.75\linewidth]{./media/sitl.png}
+            \includegraphics[width=0.75\linewidth]{sitl.png}
             \caption{SITL Workflow.}
             \label{fig:myimage}
         \end{figure}
@@ -274,7 +274,7 @@ void uiThread() {
             \item Pemrosesan Citra Digital, yang mencakup ruang warna,
             \item Operasi neighborhood menggunakan matriks konvolusi untuk mendapatkan sifat tertentu atau morfologi untuk mengubah sifat tertentu, 
             \item Thresholding untuk memperoleh layer tertentu dalam citra, 
-            \item Pemanfaatan geometri kamera untuk memperoleh koordinat \textit{latitude & longitude} dari suatu titik di kamera.
+            \item Pemanfaatan geometri kamera untuk memperoleh koordinat \textit{latitude \& longitude} dari suatu titik di kamera.
         \end{enumerate}
     \end{enumerate}
 
@@ -301,6 +301,92 @@ void uiThread() {
 \begin{itemize}
     \item \href{https://docs.google.com/presentation/d/1eWFVnwYogy59CXYhC1RoQxCGd3fFAj4huDb7gDz-0bs/edit?slide=id.g3c2a5a9cf04_3_12#slide=id.g3c2a5a9cf04_3_12}{Control N Perception}
 \end{itemize}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%% 4 February 2026
+\section{4 February 2026}
+
+\subsection{What is learned}
+\begin{enumerate}
+    \item Robot Operating System (ROS)
+    \begin{enumerate}
+        \item Intinya \textit{tech stack} / platform yang digunakan untuk melakukan processing yang cenderung sifatnya \textit{resource-heavy} dan perlu dilakukan dalam komputer terpisah (\textit{Companion Computer}) dan ROS merupakan \textit{abstraction layer} yang digunakan agar developer tidak perlu melakukan bare-metal programming. 
+        \item ROS biasanya digunakan ketika sistem memiliki tujuan tersendiri pada lingkungan yang cenderung dinamis sehingga perlu dilakukan pengambilan keputusan secara langsung (\textit{onboard}) dengan cepat pada sistem, dibandingkan dikirimkan terlebih dahulu pada GCS dan dikirimkan pesan yang sesuai (\textit{offboard}). ROS mempunyai beberapa konsep yang digunakan sebagai abstraction layer, seperti berikut.
+        \begin{enumerate}
+            \item Nodes yang mereprentasikan suatu objek pada drone yang dapat mengirimkan / menerima suatu data. Dalam hal ini, bisa saja node mencakup keseluruhan sistem node itu sendiri.
+            \item Topics yang merepresentasikan tempat pengiriman / penerimaan suatu pesan sedemikian sehingga dapat banyak penerima dapat melihat pesan tersebut.  
+            \item Services yang merepresentasikan layanan untuk suatu fungsionalitas tertentu seperti arsitektur client-service 
+            \item Actions yang merepresentasikan suatu gabungan dari services dan topics agar penerima dapat memperoleh pesan pemrosesan serta dengan hasil pemrosesan itu sendiri
+            \item Subscriber yang merepresentasikan penerima pesan itu sendiri.
+            \item Publisher yang merepresentasikan pengirim pesan itu sendiri.
+        \end{enumerate}
+    \end{enumerate}
+
+    \item Georeferencing
+    \begin{enumerate}
+        \item Konsep penentuan suatu koordinat menggunakan kamera dan ketinggian dari suatu drone.
+        \item Inti dari cara kerja georeferencing adalah dengan memanfaatkan tinggi dari drone ke lanskap. Kemudian, menggunakan sudut rentang dari kamera drone tersebut (FOH angle), dapat ditentukan jarak lebar dan panjang asli pada kamera. Dengan jarak lebar dan panjang tersebut, dapat diperoleh jarak asli per pixel pada kamera dan pada akhirnya, untuk suatu titik tertentu pada pixel kamera, dapat diperoleh lokasi titik pixel tersebut berdasarkan posisi drone dan dilakukan konversi menjadi jarak asli dan konversi kembali menjadi latitude dan longitude menggunakan rumus rerata 1 degree = 111.320 m. Untuk mempermudah pemahaman, digunakan referensi berikut.
+        \begin{figure}[ht!]
+            \centering
+            \includegraphics[width=0.75\linewidth]{./media/Georeferencing_13523048.jpg}
+            \caption{Georeferencing.}
+            \label{fig:myimage}
+        \end{figure}
+    \end{enumerate}
+
+    \item Boids Swarming Algorithm
+    \begin{enumerate}
+        \item Intiya algoritma untuk mensimulasikan perilaku \textit{swarming} dari berbagai hewan yang ada pada dunia nyata.
+        \item Cara kerja algoritma ini adalah menggunakan tiga effect : Separation yang memastikan bahwa antar objek tidak akan bertabrakan dengan satu sama lain, Cohesion yang memastikan pusat dari seluruh objek akan bergerak dengan satu arah yang sama, dan Alignment yang memastikan bahwa seluruh objek memiliki arah yang tidak selalu saling bertabrakan. Ketiga effect ini kemudian akan dikalikan dengan suatu konstanta tertentu (weight) dan dijumlahkan untuk memperoleh hasil kecepatan akhir yang akan diterapkan pada setiap objek pada \textit{swarm} tersebut.
+        \item Untuk mempermudah pemahaman, digunakan sumber sebagai \href{https://luuu-xu.github.io/boids-canvas/}{berikut}
+    \end{enumerate}
+    
+\end{enumerate}
+
+\subsection{New Tools}
+\begin{enumerate}
+    \item OpenCV di Python
+\end{enumerate}
+
+\subsection{Problem and Solutions}
+\begin{itemize}
+    \item THT2 buat georeferencing awalnya tidak terlalu intuitif untuk konversi longitude : sudah paham menggunakan trigonometri dari sumbu axis bumi dan sumbu keluar dari bumi...
+\end{itemize}
+
+\subsection{Sources}
+\begin{itemize}
+    \item \href{https://docs.google.com/presentation/d/18DQUMYNN4oPj1lSmnkNGh7D40_offYggbeVAfXhlf1g/edit?slide=id.g3bc4d0c4fba_0_3#slide=id.g3bc4d0c4fba_0_3}{Robot Operating System}
+    \item \href{https://github.com/Pendidikan-RSC-Aksantara-ITB/tht2-BrianHadianSTEI23}{THT2 CaRSC}
+\end{itemize}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%% 6 February 2026
+\section{6 February 2026}
+
+\subsection{What is learned}
+\begin{enumerate}
+    \item Praktikum ROS
+    \begin{enumerate}
+        \item Intinya implementasi ROS dan pemahaman konsep di ROS menggunakan C++.
+        \item Penggunaan publisher dan subscriber di ROS harus dibuat secara bersamaan agar tidak ada ketidaksesuaian antar keduanya.
+        \item Seharusnya pengembangan praktikum ROS dilakukan terlebih dahulu dengan menggunakan modul latih dan dicoba sendiri, tapi either way seharunys bisa lebih baik...
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{New Tools}
+\begin{enumerate}
+    \item None
+\end{enumerate}
+
+\subsection{Problem and Solutions}
+\begin{itemize}
+    \item Praktikum ROS cenderung sangat lambat dalam membuat functions nya : Bisa setup dulu, latihan dulu, dan cek dependency sebelum praktikum... 
+\end{itemize}
+
+\subsection{Sources}
+\begin{itemize}
+    \item \href{https://github.com/BrianHadianSTEI23/CaRSC_19623254_PrakROS}{Source Code Praktikum ROS}
+    \item \href{https://docs.google.com/document/d/12mYMcLWI9S0xcYhLUiTBNpxYLnoE0uDCo_HX5BvlLVs/edit?tab=t.0}{Dokumen Praktikum ROS}
+\end{itemize}
+
 
 
 \end{document}

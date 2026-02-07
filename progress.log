@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.31)  7 FEB 2026 19:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.31)  7 FEB 2026 22:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -369,21 +369,41 @@ Overfull \hbox (2.28937pt too wide) in paragraph at lines 152--153
  []
 
 [4]
-<./media/mavlink.png, id=56, 792.71156pt x 85.06781pt>
-File: ./media/mavlink.png Graphic file (type png)
-<use ./media/mavlink.png>
-Package pdftex.def Info: ./media/mavlink.png  used on input line 221.
-(pdftex.def)             Requested size: 258.75pt x 27.76743pt.
- [5]
+
+LaTeX Warning: File `mavlink.png' not found on input line 221.
+
+
+h:/Visual-Studio-Code-Data/Aksantara/ca-aksan/technical-journal-Ca-RSC26-13523048/progress.tex:221: Package pdftex.def Error: File `mavlink.png' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.221 ...aphics[width=0.75\linewidth]{mavlink.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[5]
 Overfull \hbox (0.13844pt too wide) in paragraph at lines 230--231
 []\OT1/cmr/m/n/10 Software in the loop (SITL) meru-pakan ek-sekusi pro-gram yang dibuat
  []
 
-<./media/sitl.png, id=74, 652.68843pt x 305.64188pt>
-File: ./media/sitl.png Graphic file (type png)
-<use ./media/sitl.png>
-Package pdftex.def Info: ./media/sitl.png  used on input line 234.
-(pdftex.def)             Requested size: 258.75pt x 121.17259pt.
+
+LaTeX Warning: File `sitl.png' not found on input line 234.
+
+
+h:/Visual-Studio-Code-Data/Aksantara/ca-aksan/technical-journal-Ca-RSC26-13523048/progress.tex:234: Package pdftex.def Error: File `sitl.png' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.234 ...egraphics[width=0.75\linewidth]{sitl.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
 
 Overfull \hbox (10.55405pt too wide) in paragraph at lines 231--238
 []\OT1/cmr/m/n/10 Cara kerja SITL dalam Ak-san-tara ITB bi-asanya dim-u-lai dari melakukan
@@ -393,29 +413,16 @@ Overfull \hbox (10.55405pt too wide) in paragraph at lines 231--238
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.245     \item G
-                 azebo Simulator
+l.239     \end{enumerate}
+                         ] [7
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.245     \item G
-                 azebo Simulator <./media/mavlink.png> <./media/sitl.png>]
+l.259     \item \href
+                     {https://docs.google.com/presentation/d/161pANZ7QofLcvc...]
 Overfull \hbox (7.61734pt too wide) in paragraph at lines 275--276
 []\OT1/cmr/m/n/10 Operasi neigh-bor-hood meng-gu-nakan ma-triks kon-vo-lusi un-tuk men-
  []
-
-[7]
-h:/Visual-Studio-Code-Data/Aksantara/ca-aksan/technical-journal-Ca-RSC26-13523048/progress.tex:277: Misplaced alignment tab character &.
-<argument> latitude &
-                      longitude
-l.277 ...h koordinat \textit{latitude & longitude}
-                                                   dari suatu titik di kamera.
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
 
 
 Overfull \hbox (10.43596pt too wide) in paragraph at lines 284--285
@@ -437,7 +444,43 @@ Overfull \hbox (7.52844pt too wide) in paragraph at lines 285--286
 \OT1/cmr/m/n/10 gu-nakan neu-ral net-work, se-men-tara transfer-learning meru-pakan model
  []
 
-[8] (./progress.aux)
+[8]
+Overfull \hbox (0.467pt too wide) in paragraph at lines 313--314
+\OT1/cmr/m/n/10 pengam-bi-lan kepu-tu-san se-cara lang-sung (\OT1/cmr/m/it/10 on-board\OT1/cmr/m/n/10 ) den-gan cepat pada
+ []
+
+[9]
+<./media/Georeferencing_13523048.jpg, id=132, 3051.4pt x 2319.66624pt>
+File: ./media/Georeferencing_13523048.jpg Graphic file (type jpg)
+<use ./media/Georeferencing_13523048.jpg>
+Package pdftex.def Info: ./media/Georeferencing_13523048.jpg  used on input line 330.
+(pdftex.def)             Requested size: 258.75pt x 196.69118pt.
+
+Overfull \hbox (3.25067pt too wide) in paragraph at lines 327--334
+[]\OT1/cmr/m/n/10 Inti dari cara kerja geo-ref-er-enc-ing adalah den-gan me-man-faatkan tinggi
+ []
+
+
+Overfull \hbox (2.13507pt too wide) in paragraph at lines 338--339
+[]\OT1/cmr/m/n/10 Intiya al-go-ritma un-tuk men-sim-u-lasikan per-i-laku \OT1/cmr/m/it/10 swarm-ing \OT1/cmr/m/n/10 dari berba-
+ []
+
+[10
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.339         \item C
+                     ara kerja algoritma ini adalah menggunakan tiga effect ... <./media/Georeferencing_13523048.jpg>]
+Overfull \hbox (3.8063pt too wide) in paragraph at lines 340--341
+[]\OT1/cmr/m/n/10 Untuk mem-per-mu-dah pema-haman, di-gu-nakan sum-ber se-ba-gai []berikut[] 
+ []
+
+
+Overfull \hbox (0.88852pt too wide) in paragraph at lines 370--371
+[]\OT1/cmr/m/n/10 Seharusnya pengem-ban-gan prak-tikum ROS di-lakukan ter-lebih dahulu
+ []
+
+[11] [12] (./progress.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -453,21 +496,21 @@ Package rerunfilecheck Warning: File `progress.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `progress.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  1F434B06DAC5D2066C57D0805E280FC2;1880.
+(rerunfilecheck)             After:  7C0D9FA0337381AB77EE4EFF7C4DA160;3144.
  ) 
 Here is how much of TeX's memory you used:
- 14261 strings out of 467533
- 274302 string characters out of 5423668
+ 14351 strings out of 467533
+ 275751 string characters out of 5423668
  795549 words of memory out of 5000000
- 42954 multiletter control sequences out of 15000+600000
+ 43007 multiletter control sequences out of 15000+600000
  632825 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,7n,79p,719b,977s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,7n,79p,808b,977s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <h:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><h:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><h:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><h:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><h:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><h:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><h:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><h:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on progress.pdf (8 pages, 278353 bytes).
+Output written on progress.pdf (12 pages, 666655 bytes).
 PDF statistics:
- 181 PDF objects out of 1000 (max. 8388607)
- 149 compressed objects within 2 object streams
- 78 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 240 PDF objects out of 1000 (max. 8388607)
+ 206 compressed objects within 3 object streams
+ 115 named destinations out of 1000 (max. 500000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
